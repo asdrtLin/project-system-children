@@ -9,10 +9,9 @@ import type { microProps } from "./type";
 
 let router = null;
 let instance: typeApp;
-function render(props: microProps = { container: "" }) {
+function render(props: microProps = { container: HTMLElement }) {
   const { container } = props;
   router = createRouter({
-    // base: window.__POWERED_BY_QIANKUN__ ? '/vue3/' : '/',
     history: createWebHistory(window.__POWERED_BY_QIANKUN__ ? "/vue3/" : "/"),
     routes,
   });
@@ -30,16 +29,15 @@ if (!window.__POWERED_BY_QIANKUN__) {
 }
 
 export async function bootstrap() {
-  // console.log("[vue] vue app bootstraped");
+  console.log("%c[vue] vue app bootstraped", "color:green;");
 }
 export async function mount(props: microProps) {
-  // console.log("[vue] props from main framework", props);
+  console.log("[vue] props from main framework", props);
   render(props);
 }
 export async function unmount() {
+  console.log("%c[vue] vue app unmount", "color:red;");
   instance.unmount();
-  // instance.$el.innerHTML = "";
   instance = null as any;
-  console.log(instance);
   router = null;
 }
