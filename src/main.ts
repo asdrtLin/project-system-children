@@ -20,7 +20,11 @@ function render(props: microProps = { container: HTMLElement }) {
   instance
     .use(store)
     .use(router)
-    .mount(container ? container.querySelector("#app") : "#app");
+    .mount(
+      container && container.querySelector
+        ? container.querySelector("#app")
+        : "#app"
+    );
 }
 
 // 独立运行时
@@ -38,6 +42,6 @@ export async function mount(props: microProps) {
 export async function unmount() {
   console.log("%c[vue] vue app unmount", "color:red;");
   instance.unmount();
-  instance = null as any;
+  instance = null as unknown as typeApp;
   router = null;
 }
